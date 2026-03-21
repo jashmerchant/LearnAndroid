@@ -1,8 +1,8 @@
 package com.jashmerchant.bankaccountprogram
 
 class BankAccount(
-    var accountHolder: String,
-    var balance: Double) {
+    private var accountHolder: String,
+    private var balance: Double) {
     private val transactionHistory = mutableListOf<String>()
     fun deposit(amount: Double) {
         balance += amount
