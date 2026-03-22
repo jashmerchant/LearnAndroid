@@ -11,7 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jashmerchant.captaingame.ui.theme.CaptainGameTheme
@@ -36,9 +36,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CaptainGame() {
-    val treasureFound = remember { mutableStateOf(0) }
-    val direction = remember { mutableStateOf("North") }
-    val stormOrTreasure = remember { mutableStateOf("") }
+    val treasureFound = rememberSaveable { mutableStateOf(0) }
+    val direction = rememberSaveable { mutableStateOf("North") }
+    val stormOrTreasure = rememberSaveable { mutableStateOf("") }
 
     Column {
         Text(text = "Treasures Found: ${treasureFound.value}")
