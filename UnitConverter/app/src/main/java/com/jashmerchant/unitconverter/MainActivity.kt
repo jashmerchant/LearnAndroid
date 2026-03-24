@@ -22,6 +22,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -47,6 +51,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnitConverter() {
+    var inputValue by rememberSaveable { mutableStateOf("") }
+    var outputValue by rememberSaveable { mutableStateOf("") }
+
+    var inputUnit by rememberSaveable { mutableStateOf("Centimeters") }
+    var outputUnit by rememberSaveable { mutableStateOf("Meters") }
+
+    var iExpanded by rememberSaveable { mutableStateOf(false) }
+    var oExpanded by rememberSaveable { mutableStateOf(false) }
+
+    val conversionFactor = rememberSaveable { mutableStateOf(0.01) }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
