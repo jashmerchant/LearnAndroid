@@ -49,13 +49,13 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
+@Composable // Composables are the building blocks of a Jetpack Compose UI
 fun UnitConverter() {
     var inputValue by rememberSaveable { mutableStateOf("") }
     var outputValue by rememberSaveable { mutableStateOf("") }
 
-    var inputUnit by rememberSaveable { mutableStateOf("Centimeters") }
-    var outputUnit by rememberSaveable { mutableStateOf("Meters") }
+    var inputUnit by rememberSaveable { mutableStateOf("Select") }
+    var outputUnit by rememberSaveable { mutableStateOf("Select") }
 
     var iExpanded by rememberSaveable { mutableStateOf(false) }
     var oExpanded by rememberSaveable { mutableStateOf(false) }
@@ -63,43 +63,69 @@ fun UnitConverter() {
     val conversionFactor = rememberSaveable { mutableStateOf(0.01) }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(), // Tells Column (a composable) how to behave
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Unit Converter")
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = "", onValueChange = {})
+        OutlinedTextField(value = inputValue, onValueChange = {
+            inputValue = it
+        })
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             Box {
-                Button(onClick = { /*TODO*/ }) {
-                    Text("Select")
+                Button(onClick = { iExpanded = true }) {
+                    Text(inputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = { /*TODO*/ }) {
-                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = { /*TODO*/ })
+                DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false }) {
+                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = {
+                        inputUnit = "Centimeters"
+                        iExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Meters") }, onClick = {
+                        inputUnit = "Meters"
+                        iExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Feet") }, onClick = {
+                        inputUnit = "Feet"
+                        iExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = {
+                        inputUnit = "Millimeters"
+                        iExpanded = false
+                    })
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
             Box {
-                Button(onClick = { /*TODO*/ }) {
-                    Text("Select")
+                Button(onClick = { oExpanded = true }) {
+                    Text(outputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                 }
-                DropdownMenu(expanded = false, onDismissRequest = { /*TODO*/ }) {
-                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Meters") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Feet") }, onClick = { /*TODO*/ })
-                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = { /*TODO*/ })
+                DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false }) {
+                    DropdownMenuItem(text = { Text("Centimeters") }, onClick = {
+                        outputUnit = "Centimeters"
+                        oExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Meters") }, onClick = {
+                        outputUnit = "Meters"
+                        oExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Feet") }, onClick = {
+                        outputUnit = "Feet"
+                        oExpanded = false
+                    })
+                    DropdownMenuItem(text = { Text("Millimeters") }, onClick = {
+                        outputUnit = "Millimeters"
+                        oExpanded = false
+                    })
                 }
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Text("Result")
+        Text("Result: $outputValue" )
     }
 }
 
